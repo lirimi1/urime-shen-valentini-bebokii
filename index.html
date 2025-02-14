@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Valentine's Day</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            text-align: center;
+            background: linear-gradient(to right, #ff758c, #ff7eb3);
+            color: white;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            position: relative;
+        }
+        h1 {
+            font-size: 3rem;
+            margin: 10px;
+        }
+        p {
+            font-size: 1.5rem;
+            margin: 10px;
+            max-width: 600px;
+        }
+        .heart {
+            font-size: 5rem;
+            animation: heartbeat 1.5s infinite;
+        }
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        .slideshow-container {
+            max-width: 600px;
+            position: relative;
+            margin: auto;
+        }
+        .slide {
+            display: none;
+        }
+        img {
+            width: 100%;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+            color: white;
+            cursor: pointer;
+            padding: 10px;
+            background: rgba(0, 0, 0, 0.5);
+            border: none;
+            border-radius: 5px;
+        }
+        .prev { left: 0; }
+        .next { right: 0; }
+        .footer {
+            position: absolute;
+            bottom: 20px;
+            font-size: 1rem;
+        }
+        .floating-hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
+        }
+        .heart-float {
+            position: absolute;
+            color: red;
+            font-size: 2rem;
+            animation: floatUp 5s linear infinite;
+        }
+        @keyframes floatUp {
+            0% { transform: translateY(100vh) scale(1); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-hearts"></div>
+    <div class="container">
+        <div class="heart">❤️</div>
+        <h1>Happy Valentine's Day, Melaqja eme!</h1>
+<!--         <p>You are the most precious part of my life. Every moment with you is a beautiful blessing. I love you more than words can express! 💕</p> -->
+        <p>Je drita e syve te mi, tpaca gjithmone, cdo moment me ty oshte nje BEKIM, Te dua ma shume se qe mund ta them me fjale 💕</p>
+        <div class="slideshow-container">
+            <div class="slide"><img src="photo1.jpg.jpeg" alt="Photo 1"></div>
+            <div class="slide"><img src="photo2.jpg.jpeg" alt="Photo 2"></div>
+            <div class="slide"><img src="photo3.jpg.jpeg" alt="Photo 3"></div>
+            <div class="slide"><img src="photo4.jpg.jpeg" alt="Photo 4"></div>
+            <button class="prev" onclick="changeSlide(-1)">&#10094;</button>
+            <button class="next" onclick="changeSlide(1)">&#10095;</button>
+        </div>
+        <p>Forever yours,</p>
+        <p><strong>Your Love</strong></p>
+    </div>
+    <div class="footer">Made with ❤️ just for you!</div>
+    <script>
+        let slideIndex = 1;
+        showSlides(slideIndex);
+
+        function showSlides(n) {
+            let slides = document.getElementsByClassName("slide");
+            if (n > slides.length) { slideIndex = 1; }
+            if (n < 1) { slideIndex = slides.length; }
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slides[slideIndex - 1].style.display = "block";
+        }
+
+        function changeSlide(n) {
+            showSlides(slideIndex += n);
+        }
+
+        function autoSlide() {
+            showSlides(slideIndex += 1);
+            setTimeout(autoSlide, 3000);
+        }
+        autoSlide();
+
+        function createHearts() {
+            const heartContainer = document.querySelector(".floating-hearts");
+            for (let i = 0; i < 15; i++) {
+                let heart = document.createElement("div");
+                heart.classList.add("heart-float");
+                heart.innerHTML = "❤️";
+                heart.style.left = Math.random() * 100 + "vw";
+                heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+                heartContainer.appendChild(heart);
+                setTimeout(() => { heart.remove(); }, 5000);
+            }
+        }
+        setInterval(createHearts, 500);
+    </script>
+</body>
+</html>
